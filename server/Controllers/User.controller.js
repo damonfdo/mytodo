@@ -1,10 +1,10 @@
-import express from 'express'
+
 import md5 from 'md5'
 import jwt from 'jsonwebtoken'
 import User from '../Models/User.js'
 
 const SECRET = process.env.SECRET
-const router = express.Router();
+
 
 // TODO 
 // Implement Test Case 
