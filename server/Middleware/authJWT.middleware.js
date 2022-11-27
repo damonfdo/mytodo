@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import User from '../Models/User.js'
 const SECRET = process.env.SECRET
 
 export const isLoggedIn = async (req, res, next) => {
@@ -12,7 +13,8 @@ export const isLoggedIn = async (req, res, next) => {
                 const payload = await jwt.verify(token, SECRET)
 
                 if (payload) {
-                    req.user = payload
+                    let user = await User.findOne({ email: payload.email })
+                    req.user = user
                     next()
                 } else {
                     res.status(400).json({ message: 'Failed to verify ' })
