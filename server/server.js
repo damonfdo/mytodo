@@ -1,26 +1,9 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-
-
+import mongoose from 'mongoose'
+import app from './app.js'
 import db from './Config/db.js'
 
-// Fetch custom route files 
-import userRoutes from './Routes/User.routes.js'
-import mongoose from 'mongoose'
-
-// confifgure express 
-const app = express()
-app.use(bodyParser.json({ limit: '15mb', extended: true }))
-app.use(bodyParser.urlencoded({ limit: '15mb', extended: true }))
-app.use(cors())
-
-
-// Add Routes to express app 
-app.use('/user', userRoutes)
-
 //Define Port
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3001
 
 
 // Establish DB connection  and listen on server
