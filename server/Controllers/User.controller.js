@@ -2,12 +2,13 @@
 import md5 from 'md5'
 import jwt from 'jsonwebtoken'
 import User from '../Models/User.js'
-
+import dotenv from 'dotenv'
+dotenv.config()
 const SECRET = process.env.SECRET
 
 
 // TODO 
-// Implement Test Case 
+
 // Implement Migration 
 
 export const signUp = async (req, res) => {
@@ -61,6 +62,7 @@ export const signIn = async (req, res) => {
 
             // Create a token 
             const token = await jwt.sign({ email: user.email }, SECRET)
+
             return res.status(201).json(token)
         }
     } catch (error) {
