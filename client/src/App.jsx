@@ -5,22 +5,28 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { Container, CssBaseline, Grid, useTheme } from '@mui/material';
-import { Header } from './Components';
+import { Container, CssBaseline, Grid, List, useTheme } from '@mui/material';
+import { Auth, Header, Nav, TaskList } from './Components';
 
 
 
 function App() {
   const [count, setCount] = useState(0)
   const Theme = useTheme()
-  console.log(Theme)
+  const isLoggedIn = true
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="md">
 
-        <Header />
-      </Container>
+
+      {!isLoggedIn ? <Auth /> :
+        <Grid container >
+          <Header />
+          <Nav />
+          <TaskList />
+        </Grid>
+      }
+
     </>
 
   )
