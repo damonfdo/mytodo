@@ -1,26 +1,28 @@
 module.exports = {
   async up(db, client) {
+    const user = await db.collection('users').findOne({ email: "user@example.lk" })
+    const statCompleted = await db.collection('status').findOne({ name: "Done" })
     const doc = [
       {
         "name": "My First Task",
-        "desc": "Quick Lazy brown fox jumps over is cool!",
+        "desc": "Dummy to Delete",
         "attachment": "image.png",
-        "status": { "$oid": "6382296dddf8b67910552537" }, // Fetch Dynamically
-        "user": { "$oid": "63821db3efd4fef41da92c4c" }, // Fetch Dynamically
+        "status": { "$oid": statCompleted._id },
+        "user": { "$oid": user._id },
       },
       {
         "name": "My Second Task",
-        "desc": "Quick Lazy brown fox jumps over is cool!",
+        "desc": "Dummy to Delete",
         "attachment": "image.png",
-        "status": { "$oid": "6382296dddf8b67910552537" }, // Fetch Dynamically
-        "user": { "$oid": "63821db3efd4fef41da92c4c" }, // Fetch Dynamically
+        "status": { "$oid": statCompleted._id },
+        "user": { "$oid": user._id },
       },
       {
         "name": "My Third Task",
-        "desc": "Quick Lazy brown fox jumps over is cool!",
+        "desc": "Dummy to Delete",
         "attachment": "image.png",
-        "status": { "$oid": "6382296dddf8b67910552537" }, // Fetch Dynamically
-        "user": { "$oid": "63821db3efd4fef41da92c4c" }, // Fetch Dynamically
+        "status": { "$oid": statCompleted._id },
+        "user": { "$oid": user._id },
       },
     ]
     // this option prevents additional documents from being inserted if one fails
@@ -31,6 +33,8 @@ module.exports = {
 
   async down(db, client) {
     // TODO:: Write Down query 
+    const query = { desc: { $regex: "Delete" } }
+    await db.collection('tasks').deleteMany(query)
 
   }
 };
