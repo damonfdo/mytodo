@@ -11,7 +11,7 @@ import statusRoutes from './Routes/Status.routes.js'
 
 // confifgure express 
 const app = express()
-
+app.use(express.static('Public'))
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors(corsOptions))
