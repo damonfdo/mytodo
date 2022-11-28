@@ -1,20 +1,27 @@
-import { AppBar, Box, Container, Grid, styled, Toolbar, Typography, Link } from '@mui/material'
+import { AppBar, Box, Container, Grid, styled, Toolbar, Typography, Link, Button } from '@mui/material'
 import React from 'react'
+import { useContext } from 'react'
+import AuthContext from '../Context/AuthProvider'
+import { useNavigate } from 'react-router-dom'
 
-const Title = styled('h2')`
-color: #ff0899`
 
 const Header = () => {
+    const { setAuth } = useContext(AuthContext)
+
+    const handleLogout = () => {
+
+        localStorage.clear();
+        setAuth({})
+        useNavigate("/")
+
+    }
     return (
         <>
             <AppBar position='static'>
                 <Container maxWidth='lg'>
                     <Toolbar disableGutters>
                         <Typography >ToDo LIST</Typography>
-                        <Box sx={{ display: 'flex', justifyItems: 'end' }}>
-                            <Typography >Welcome, USER! </Typography>
-                            <Link href='#' sx={{ color: 'black' }}>Logout</Link>
-                        </Box>
+                        <Button color='info' onClick={handleLogout}>Logout</Button>
                     </Toolbar>
 
                 </Container>
