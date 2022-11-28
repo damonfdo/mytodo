@@ -7,7 +7,7 @@ import corsOptions from './Config/corsOption.js'
 // Fetch custom route files 
 import userRoutes from './Routes/User.routes.js'
 import taskRoutes from './Routes/Task.routes.js'
-
+import statusRoutes from './Routes/Status.routes.js'
 
 // confifgure express 
 const app = express()
@@ -19,5 +19,5 @@ app.use(cors(corsOptions))
 // Add Routes to express app 
 app.use('/user', userRoutes)
 app.use('/task', taskRoutes)
-
+app.use('/status', statusRoutes)
 export default app
