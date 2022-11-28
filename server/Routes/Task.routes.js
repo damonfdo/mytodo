@@ -1,7 +1,7 @@
 import express from 'express'
 import multer from 'multer'
 import { isLoggedIn } from '../Middleware/authJWT.middleware.js'
-import { createStatus, createTask, getAll, updateTask } from '../Controllers/Task.controller.js'
+import { createTask, filterByStatus, getAll, updateTask } from '../Controllers/Task.controller.js'
 
 
 var upload = multer({
@@ -25,6 +25,7 @@ const router = express.Router()
 router.get('/get', isLoggedIn, getAll)
 router.post('/create', upload.single('attachment'), isLoggedIn, createTask)
 router.put('/update/:id', isLoggedIn, upload.single('attachment'), updateTask)
+router.get('/filter/status/:statusId', isLoggedIn, filterByStatus)
 
 
 export default router

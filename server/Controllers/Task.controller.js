@@ -3,18 +3,7 @@ import Status from "../Models/Status.js"
 import Task from "../Models/Task.js"
 import User from "../Models/User.js"
 import path from 'path'
-// TODO Create Migration File
-export const createStatus = async (req, res) => {
 
-    const status = ['To Do', 'In Progress', 'Completed']
-
-    status.map(async (item) => {
-        let data = new Status({ name: item })
-        await data.save()
-    })
-
-    return res.status(200).json({ message: 'Success' })
-}
 
 
 export const getAll = async (req, res) => {
@@ -41,8 +30,10 @@ export const getAll = async (req, res) => {
 
 export const createTask = async (req, res) => {
 
-    const { name, desc, statusId } = req.body
+
+    const { name, desc, statusId, attachment } = req.body
     const { originalname } = req.file
+
 
     // Auth Middleware binds users id to req.user object 
     const user = req.user
@@ -86,3 +77,25 @@ export const updateTask = async (req, res) => {
 
 }
 
+
+//filter by Status
+export const filterByStatus = async (req, res) => {
+    const { statusId } = req.params
+    const user = req.user
+    console.log(statusId)
+    try {
+
+        const filteredTasks = await Task.find({ user: user._id, status: statusId })
+
+        if (!filteredTasks || filteredTasks.length == 0) {
+            return res.status(404).json({ message: 'No Tasks Found!' })
+        }
+        // return Filtered Tasks
+        return res.status(200).json(filteredTasks)
+
+    } catch (error) {
+        return res.status(400).json({ message: error.message })
+    }
+}
+
+//filter by Created Time
