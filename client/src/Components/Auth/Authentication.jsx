@@ -50,6 +50,7 @@ const Authentication = () => {
 
             const accessToken = res?.data
             setAuth({ accessToken })
+            localStorage.setItem('user', accessToken)
             //Rest Input values 
             setInput({ name: "", email: "", password: "" })
 
