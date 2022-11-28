@@ -8,13 +8,18 @@ WORKDIR /usr/src/app
 # COPY package.json file to WORKDIR  
 COPY package*.json ./
 
+# Copy Env file  
+COPY ../.env ./
 
 # NPM INSTALL 
 RUN npm ci --only=production
-#TODO: Install Global Application
+RUN npm install -g migrate-mongo
 
 # Copy source code  
 COPY . .
+
+#Run Migration 
+RUN migrate-mongo up
 
 EXPOSE 3000
 
