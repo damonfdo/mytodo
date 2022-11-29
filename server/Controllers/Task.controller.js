@@ -14,7 +14,7 @@ export const getAll = async (req, res) => {
         // find user email
         // const user = await User.findOne({ email: email })
         // find tasks
-        const tasks = await Task.find({ user: user._id })
+        const tasks = await Task.find({ user: user._id }).populate('status')
 
         if (!tasks || !tasks.length) {
             return res.status(200).json({ message: 'Create your first task' })
@@ -100,6 +100,7 @@ export const filterByStatus = async (req, res) => {
 
 //filter by Created Time
 export const fillterByDate = async (req, res) => {
+
     const { fromDate, toDate } = req.body
     const from = new Date(fromDate)
     const to = new Date(toDate)
