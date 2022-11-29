@@ -85,7 +85,7 @@ export const filterByStatus = async (req, res) => {
 
     try {
 
-        const filteredTasks = await Task.find({ user: user._id, status: statusId })
+        const filteredTasks = await Task.find({ user: user._id, status: statusId }).populate('status')
 
         if (!filteredTasks || filteredTasks.length == 0) {
             return res.status(404).json({ message: 'No Tasks Found!' })
@@ -108,7 +108,7 @@ export const fillterByDate = async (req, res) => {
 
     try {
 
-        const filteredTasks = await Task.find({ created_at: { $gte: `${from}`, $lte: `${to}` } })
+        const filteredTasks = await Task.find({ created_at: { $gte: `${from}`, $lte: `${to}` } }).populate('status')
 
         if (!filteredTasks || filteredTasks.length == 0) {
             return res.status(404).json({ message: 'No Tasks Found!' })
