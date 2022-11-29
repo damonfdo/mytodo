@@ -20,12 +20,6 @@ function App() {
 
   const Theme = useTheme()
 
-
-
-
-
-  // console.log(theme)
-
   return (
     <BrowserRouter>
       <CssBaseline />
@@ -35,16 +29,11 @@ function App() {
           <Wrapper>
             <Header />
             <Nav setTasks={setTasks} status={status} setStatus={setStatus} fillteredStatus={fillteredStatus} setFillteredStatus={setFillteredStatus} />
-            <Grid alignItems='center' justifyContent='center'
-              // margin='auto'
-              marginTop={3}
-              padding={4}
-            >
+            <Grid alignItems='center' justifyContent='center' >
               <CreateTask status={status} />
               <TaskList tasks={tasks} setTasks={setTasks} fillteredStatus={fillteredStatus} />
             </Grid>
           </Wrapper>
-
         } />
       </Routes>
     </BrowserRouter>
