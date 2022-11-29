@@ -9,22 +9,18 @@ const Header = () => {
     const { setAuth } = useContext(AuthContext)
 
     const handleLogout = () => {
-
-        localStorage.clear();
         setAuth({})
-        useNavigate("/")
-
     }
     return (
         <>
             <AppBar position='static'>
-                <Container maxWidth='lg'>
-                    <Toolbar disableGutters>
+                <Grid sx={{ padding: '0 20px ' }}>
+                    <Toolbar disableGutters sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginTop: 2 }}>
                         <Typography >ToDo LIST</Typography>
-                        <Button color='info' onClick={handleLogout}>Logout</Button>
+                        <Button onClick={handleLogout} sx={{ color: '#fff', borderColor: "#fff" }} variant="outlined">Logout</Button>
                     </Toolbar>
 
-                </Container>
+                </Grid>
             </AppBar>
         </>
     )

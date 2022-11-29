@@ -16,7 +16,7 @@ const Authentication = () => {
     const [isSignUp, setIsSignUp] = useState(false)
     const [errorMessage, setErrorMessage] = useState()
     const [input, setInput] = useState({
-        name: "",
+        name: "", //For Signup 
         email: "",
         password: ""
     })
@@ -50,7 +50,7 @@ const Authentication = () => {
 
             const accessToken = res?.data
             setAuth({ accessToken })
-            localStorage.setItem('user', accessToken)
+
             //Rest Input values 
             setInput({ name: "", email: "", password: "" })
 
