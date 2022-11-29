@@ -10,3 +10,12 @@ services:
     container_name: "frontend"
     ports:
       - "8080:8080"
+  terraform:
+    image: hashicorp/terraform:0.14.10
+    volumes:
+      - .:/infra
+    working_dir: /infra
+    environment:
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
