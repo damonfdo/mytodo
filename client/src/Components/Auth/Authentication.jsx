@@ -5,18 +5,19 @@ import AuthContext from '../../Context/AuthProvider'
 import axios from '../../api/axios.js'
 import { useEffect } from 'react'
 import { useRef } from 'react'
+import { useNavigate } from 'react-router'
 
 const SIGNIN_URL = '/user/signin'
 const SIGNUP_URL = '/user/signup'
 
 const Authentication = () => {
-    const errRef = useRef()
+    const navigate = useNavigate()
 
     const { setAuth } = useContext(AuthContext)
     const [isSignUp, setIsSignUp] = useState(false)
     const [errorMessage, setErrorMessage] = useState()
     const [input, setInput] = useState({
-        name: "", //For Signup 
+        name: "",
         email: "",
         password: ""
     })
@@ -50,11 +51,12 @@ const Authentication = () => {
 
             const accessToken = res?.data
             setAuth({ accessToken })
-
+            localStorage.setItem('user', accessToken)
             //Rest Input values 
             setInput({ name: "", email: "", password: "" })
 
             setSuccess(true)
+            navigate('/app')
 
         } catch (error) {
             setSuccess(false)

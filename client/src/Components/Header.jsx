@@ -6,10 +6,15 @@ import { useNavigate } from 'react-router-dom'
 
 
 const Header = () => {
-    const { setAuth } = useContext(AuthContext)
 
+    const { setAuth } = useContext(AuthContext)
+    const navigate = useNavigate()
     const handleLogout = () => {
+
+        localStorage.clear();
         setAuth({})
+        navigate("/")
+
     }
     return (
         <>
