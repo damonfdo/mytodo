@@ -16,6 +16,8 @@ const DATE_FILTER_URL = '/task/filter/date/'
 
 const style = {
     position: 'absolute',
+    display: 'flex',
+    flexDirection: 'column',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -23,8 +25,11 @@ const style = {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
-};
+    p: 3,
+}
+const datePicker = {
+    margin: '1em 0',
+}
 const Nav = ({ setTasks, status, setStatus, fillteredStatus, setFillteredStatus }) => {
 
     const [open, setOpen] = useState()
@@ -116,27 +121,33 @@ const Nav = ({ setTasks, status, setStatus, fillteredStatus, setFillteredStatus 
                 {/* Date Filter Modal  */}
                 <Modal open={open} onClose={handleModal}>
                     <form onSubmit={handleSubmit}>
-
-
                         <Box sx={style}>
                             <Typography> Select Date Range</Typography>
                             <LocalizationProvider dateAdapter={AdapterMoment}>
-                                <DatePicker
-                                    label="From"
-                                    value={from}
-                                    onChange={(newValue) => {
-                                        setFromValue(newValue);
-                                    }}
-                                    renderInput={(params) => <TextField {...params} />}
-                                />
-                                <DatePicker
-                                    label="to"
-                                    value={to}
-                                    onChange={(newValue) => {
-                                        setToValue(newValue);
-                                    }}
-                                    renderInput={(params) => <TextField {...params} />}
-                                />
+                                <div style={datePicker}>
+                                    <DatePicker
+                                        label="From"
+                                        value={from}
+                                        onChange={(newValue) => {
+                                            setFromValue(newValue);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+
+                                    />
+                                </div>
+                                <div style={datePicker}>
+                                    <DatePicker
+
+                                        label="to"
+                                        value={to}
+                                        onChange={(newValue) => {
+                                            setToValue(newValue);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+
+                                    />
+                                </div>
+
                             </LocalizationProvider>
                             <Button type='submit'>Submit</Button>
                         </Box>
